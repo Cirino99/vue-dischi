@@ -33,7 +33,7 @@ export default {
 
 <style scoped lang="scss">
 section {
-    width: 80%;
-    margin: 0 auto;
+    width: 70%;
+    margin: 60px auto;
 }
 </style>
