@@ -23,7 +23,7 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### Descrizione esercizio
+## Descrizione esercizio
 Create un nuovo progetto utilizzando Vue CLI
 e definite i componenti necessari per strutturare il layout come da screenshot allegato.
 Al caricamento della pagina, effettuate una chiama ajax all’API di boolean: https://flynn.boolean.careers/exercises/api/array/music
