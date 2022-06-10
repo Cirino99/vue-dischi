@@ -9,7 +9,6 @@
 import Header from "./components/Header.vue";
 import Content from "./components/Content.vue";
 
-
 export default {
     name: 'App',
     components: {
@@ -26,6 +25,9 @@ export default {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
+    background-color: #1e2d3b;
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
 }
 </style>
