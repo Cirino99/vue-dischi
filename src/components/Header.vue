@@ -11,8 +11,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../assets/style/vars.scss";
+
 header {
-    background-color: #2e3a46;
+    background-color: $backgroundColorElements;
     padding: 10px;
 
     img {

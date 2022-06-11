@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <Header/>
-        <Content/>
+        <Header />
+        <Content />
     </div>
 </template>
 
@@ -12,24 +12,27 @@ import Content from "./components/Content.vue";
 export default {
     name: 'App',
     components: {
-    Header,
-    Content
-}
+        Header,
+        Content
+    }
 }
 </script>
 
 <style lang="scss">
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./assets/style/vars.scss";
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #1e2d3b;
+    background-color: $backgroundColorPrimary;
     height: 100vh;
     width: 100%;
     overflow: auto;
