@@ -5,10 +5,10 @@
         </div>
         <div v-else>
             <div class="d-flex justify-content-center mb-4">
-                <Select />
+                <Select @mySelect="changeSelectGenere" />
             </div>
             <div class="d-flex flex-wrap">
-                <CardSong v-for="(song, index) in songsList" :key="index" :item="song" />
+                <CardSong v-for="(song, index) in filterSongs" :key="index" :item="song" />
             </div>
         </div>
     </section>
@@ -27,7 +27,8 @@ export default {
         return {
             apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
             songsList: [],
-            loading: true
+            loading: true,
+            selectGenere: 'All'
         }
     },
     created() {
@@ -38,7 +39,23 @@ export default {
             axios.get(this.apiUrl).then((result) => {
                 this.songsList = result.data.response;
                 this.loading = false;
+            }).catch((error) => {
+                console.log('Errore', error);
             });
+        },
+        changeSelectGenere(e) {
+            this.selectGenere = e;
+        }
+    },
+    computed: {
+        filterSongs() {
+            if (this.selectGenere === 'All') {
+                return this.songsList;
+            } else {
+                return this.songsList.filter(item => {
+                    return item.genre.toLowerCase().includes(this.selectGenere.toLowerCase());
+                });
+            }
         }
     }
 }

@@ -1,18 +1,28 @@
 <template>
     <div>
-        <select class="my-select" name="genere">
-            <option value="all">All</option>
-            <option value="rock">Rock</option>
-            <option value="pop">Pop</option>
-            <option value="jazz">Jazz</option>
-            <option value="metal">Metal</option>
+        <select class="my-select" name="genere" v-model="selected">
+            <option @click="sendSelectValue">All</option>
+            <option @click="sendSelectValue">Rock</option>
+            <option @click="sendSelectValue">Pop</option>
+            <option @click="sendSelectValue">Jazz</option>
+            <option @click="sendSelectValue">Metal</option>
         </select>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'SelectVue'
+    name: 'SelectVue',
+    data() {
+        return {
+            selected: 'All'
+        }
+    },
+    methods: {
+        sendSelectValue() {
+            this.$emit('mySelect', this.selected);
+        }
+    }
 }
 </script>
 
