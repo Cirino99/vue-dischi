@@ -1,11 +1,7 @@
 <template>
     <div>
         <select class="my-select" name="genere" v-model="selected">
-            <option @click="sendSelectValue">All</option>
-            <option @click="sendSelectValue">Rock</option>
-            <option @click="sendSelectValue">Pop</option>
-            <option @click="sendSelectValue">Jazz</option>
-            <option @click="sendSelectValue">Metal</option>
+            <option v-for="(value, index) in selectItem" :key="index" @click="sendSelectValue">{{ value }}</option>
         </select>
     </div>
 </template>
@@ -17,6 +13,9 @@ export default {
         return {
             selected: 'All'
         }
+    },
+    props: {
+        selectItem: Array
     },
     methods: {
         sendSelectValue() {

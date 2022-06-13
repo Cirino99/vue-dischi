@@ -5,7 +5,7 @@
         </div>
         <div v-else>
             <div class="d-flex justify-content-center mb-4">
-                <Select @mySelect="changeSelectGenere" />
+                <Select @mySelect="changeSelectGenere" :selectItem="searchGenereSongs()" />
             </div>
             <div class="d-flex flex-wrap">
                 <CardSong v-for="(song, index) in filterSongs" :key="index" :item="song" />
@@ -28,7 +28,8 @@ export default {
             apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
             songsList: [],
             loading: true,
-            selectGenere: 'All'
+            selectGenere: 'All',
+            genereListSongs: ['All']
         }
     },
     created() {
@@ -45,6 +46,13 @@ export default {
         },
         changeSelectGenere(e) {
             this.selectGenere = e;
+        },
+        searchGenereSongs() {
+            this.songsList.forEach(element => {
+                if (!this.genereListSongs.includes(element.genre))
+                    this.genereListSongs.push(element.genre);
+            });
+            return this.genereListSongs;
         }
     },
     computed: {
