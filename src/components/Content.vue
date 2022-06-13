@@ -4,8 +4,11 @@
             <Load />
         </div>
         <div v-else>
-            <div class="d-flex justify-content-center mb-4">
+            <div class="d-flex justify-content-center align-items-center mb-4">
+                <span>Genere:</span>
                 <Select @mySelect="changeSelectGenere" :selectItem="searchGenereSongs()" />
+                <span>Autore:</span>
+                <Select @mySelect="changeSelectAuthor" :selectItem="searchAuthorSongs()" />
             </div>
             <div class="d-flex flex-wrap">
                 <CardSong v-for="(song, index) in filterSongs" :key="index" :item="song" />
@@ -29,7 +32,9 @@ export default {
             songsList: [],
             loading: true,
             selectGenere: 'All',
-            genereListSongs: ['All']
+            selectAuthor: 'All',
+            genereListSongs: ['All'],
+            authorListSongs: ['All']
         }
     },
     created() {
@@ -47,22 +52,46 @@ export default {
         changeSelectGenere(e) {
             this.selectGenere = e;
         },
+        changeSelectAuthor(e) {
+            this.selectAuthor = e;
+        },
         searchGenereSongs() {
             this.songsList.forEach(element => {
                 if (!this.genereListSongs.includes(element.genre))
                     this.genereListSongs.push(element.genre);
             });
             return this.genereListSongs;
+        },
+        searchAuthorSongs() {
+            this.songsList.forEach(element => {
+                if (!this.authorListSongs.includes(element.author))
+                    this.authorListSongs.push(element.author);
+            });
+            return this.authorListSongs;
         }
     },
     computed: {
         filterSongs() {
             if (this.selectGenere === 'All') {
-                return this.songsList;
+                if (this.selectAuthor === 'All') {
+                    return this.songsList;
+                } else {
+                    return this.songsList.filter(item => {
+                        return item.author.toLowerCase().includes(this.selectAuthor.toLowerCase());
+                    });
+                }
             } else {
-                return this.songsList.filter(item => {
-                    return item.genre.toLowerCase().includes(this.selectGenere.toLowerCase());
-                });
+                if (this.selectAuthor === 'All') {
+                    return this.songsList.filter(item => {
+                        return item.genre.toLowerCase().includes(this.selectGenere.toLowerCase());
+                    });
+                } else {
+                    return this.songsList.filter(item => {
+                        if (item.genre.toLowerCase().includes(this.selectGenere.toLowerCase()) && item.author.toLowerCase().includes(this.selectAuthor.toLowerCase())) {
+                            return item;
+                        }
+                    });
+                }
             }
         }
     }
@@ -70,8 +99,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../assets/style/vars.scss";
+
 section {
     width: 70%;
     margin: 60px auto;
+
+    div {
+        div {
+            span {
+                color: $colorTextPrimary;
+                font-size: 18px;
+                padding: 0 10px;
+            }
+        }
+    }
 }
 </style>
