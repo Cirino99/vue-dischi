@@ -3,8 +3,13 @@
         <div v-if="loading" class="d-flex justify-content-center">
             <Load />
         </div>
-        <div v-else class="d-flex flex-wrap">
-            <CardSong v-for="(song, index) in songsList" :key="index" :item="song" />
+        <div v-else>
+            <div class="d-flex justify-content-center mb-4">
+                <Select />
+            </div>
+            <div class="d-flex flex-wrap">
+                <CardSong v-for="(song, index) in songsList" :key="index" :item="song" />
+            </div>
         </div>
     </section>
 </template>
@@ -13,10 +18,11 @@
 import CardSong from './CardSong.vue';
 import axios from 'axios'
 import Load from './Load.vue';
+import Select from './Select.vue';
 
 export default {
     name: "ContentVue",
-    components: { CardSong, Load },
+    components: { CardSong, Load, Select },
     data() {
         return {
             apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
