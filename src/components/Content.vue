@@ -6,9 +6,9 @@
         <div v-else>
             <div class="d-flex justify-content-center align-items-center mb-4">
                 <span>Genere:</span>
-                <Select @mySelect="changeSelectGenere" :selectItem="searchGenereSongs()" />
+                <Select @mySelect="changeSelectGenere" :selectItem="genereListSongs" />
                 <span>Autore:</span>
-                <Select @mySelect="changeSelectAuthor" :selectItem="searchAuthorSongs()" />
+                <Select @mySelect="changeSelectAuthor" :selectItem="authorListSongs" />
             </div>
             <div class="d-flex flex-wrap">
                 <CardSong v-for="(song, index) in filterSongs" :key="index" :item="song" />
@@ -45,6 +45,8 @@ export default {
             axios.get(this.apiUrl).then((result) => {
                 this.songsList = result.data.response;
                 this.loading = false;
+                this.searchGenereSongs();
+                this.searchAuthorSongs();
             }).catch((error) => {
                 console.log('Errore', error);
             });
@@ -60,14 +62,12 @@ export default {
                 if (!this.genereListSongs.includes(element.genre))
                     this.genereListSongs.push(element.genre);
             });
-            return this.genereListSongs;
         },
         searchAuthorSongs() {
             this.songsList.forEach(element => {
                 if (!this.authorListSongs.includes(element.author))
                     this.authorListSongs.push(element.author);
             });
-            return this.authorListSongs;
         }
     },
     computed: {
